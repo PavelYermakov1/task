@@ -61,6 +61,9 @@ class ButtonGame {
               starError.style.backgroundImage = 'url("./src/assets/img/star.svg")';
               starError.classList.add('star-error');
               rating.append(starError);
+              store.setState({
+                counter: 0,
+              });
               count += 1;
               store.setState({
                 counter: count,
