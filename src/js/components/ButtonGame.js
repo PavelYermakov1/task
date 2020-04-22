@@ -68,9 +68,15 @@ class ButtonGame {
             }
             if (!store.getState().currentWord) {
               if (store.getState().counter === 0) {
+                store.setState({
+                  counter: 0,
+                });
                 this.succedPlay();
                 setTimeout(this.backPlay, 7000);
               } else {
+                store.setState({
+                  counter: 0,
+                });
                 this.failurePlay(store.getState().counter);
                 setTimeout(this.backPlay, 7000);
               }
