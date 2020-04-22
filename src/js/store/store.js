@@ -2,10 +2,9 @@ class Store {
   constructor() {
     this.state = {
       switch: 'train',
-      statics: {
-        correct: 110,
-        wrong: 43,
-      },
+      train: [],
+      gameCorrect: [],
+      gameWrong: [],
       category: null,
       rotate: 'front',
       counter: 0,

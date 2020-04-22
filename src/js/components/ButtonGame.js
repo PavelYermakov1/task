@@ -1,17 +1,12 @@
-/* eslint-disable no-loop-func */
-/* eslint-disable operator-assignment */
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-const-assign */
-
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-loop-func */
+
 import store from '../store/store';
 
 
 class ButtonGame {
   play() {
-    // TODO: remake flag name
     if (store.getState().switch === 'play' && store.getState().category != null) {
       const arr = [];
       let count = 0;
@@ -40,8 +35,10 @@ class ButtonGame {
           if (store.getState().game) {
             const { target } = event;
             if (target.getAttribute('data') === store.getState().currentWord) {
+              store.getState().gameCorrect.push(target.firstChild.textContent);
+              localStorage.setItem('gameCorrect', JSON.stringify(store.getState().gameCorrect));
               target.classList.add('inactive');
-              this.audioPlay('./src/assets/audio/badumtss.mp3');
+              this.audioPlay('./src/assets/audio/success.mp3');
               const starSucces = document.createElement('div');
               starSucces.style.backgroundImage = 'url("./src/assets/img/star-win.svg")';
               starSucces.classList.add('star-succes');
@@ -55,14 +52,16 @@ class ButtonGame {
                   currentWord: arr.pop().getAttribute('data'),
                 });
               }
-              setTimeout(this.audioPlay, 2000, store.getState().currentWord);
+              setTimeout(this.audioPlay, 1500, store.getState().currentWord);
             } else if (!target.classList.contains('inactive')) {
-              this.audioPlay('./src/assets/audio/noo.mp3');
+              this.audioPlay('./src/assets/audio/error.mp3');
+              store.getState().gameWrong.push(target.firstChild.textContent);
+              localStorage.setItem('gameWrong', JSON.stringify(store.getState().gameWrong));
               const starError = document.createElement('div');
               starError.style.backgroundImage = 'url("./src/assets/img/star.svg")';
               starError.classList.add('star-error');
               rating.append(starError);
-              count = count + 1;
+              count += 1;
               store.setState({
                 counter: count,
               });

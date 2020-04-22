@@ -1,6 +1,5 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-restricted-syntax */
 
 import store from '../store/store';
 import sets from '../constants/sets';
@@ -14,9 +13,13 @@ const mainContainer = document.querySelector('.main-container');
 class CardsCanvas {
   render() {
     const prevCategoryContainer = document.querySelector('.category-container');
-    if (store.getState().category !== null) {
+    const prevStatisticsContainer = document.querySelector('.statistics-container');
+    if (store.getState().category !== null && store.getState().category !== 'Statistics') {
       if (prevCategoryContainer) {
         prevCategoryContainer.remove();
+      }
+      if (prevStatisticsContainer) {
+        prevStatisticsContainer.remove();
       }
 
 
@@ -101,7 +104,7 @@ class CardsCanvas {
         elem.parentElement.classList.add('translate');
       });
       const move = elem.parentElement;
-      move.addEventListener('mouseout', () => {
+      move.addEventListener('mouseleave', () => {
         if (store.getState().rotate === 'back') {
           elem.parentElement.classList.remove('translate');
           store.setState({
@@ -119,6 +122,8 @@ class CardsCanvas {
         elem.addEventListener('click', (event) => {
           const { target } = event;
           if (target.className !== 'rotate') {
+            store.getState().train.push(target.firstChild.textContent);
+            localStorage.setItem('train', JSON.stringify(store.getState().train));
             sound.forEach((e) => {
               if (e.word === target.firstChild.textContent) {
                 const audio = new Audio(`${e.audioSrc}`);

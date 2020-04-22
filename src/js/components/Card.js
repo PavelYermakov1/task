@@ -1,12 +1,13 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 
 import store from '../store/store';
 
 const mainCards = document.querySelectorAll('.main-card');
 const listNavigation = document.querySelector('.menu');
 const mainContainer = document.querySelector('.main-container');
+const menuLink = document.querySelectorAll('.header-item');
+const checkbox = document.querySelector('.hamburger-menu>input');
 
 class Card {
   render() {
@@ -46,7 +47,6 @@ class Card {
 
       const rotate = document.createElement('div');
       rotate.classList.add('rotate');
-      // rotate.style.backgroundImage = 'url("./src/assets/img/rotate.jpg")';
 
       const cardTitle = document.createElement('div');
       cardTitle.classList.add('card-title');
@@ -84,6 +84,13 @@ class Card {
     store.setState({
       category: `${currentTarget.textContent.trim()}`,
     });
+    menuLink.forEach((e) => {
+      e.classList.remove('active');
+      if (e.textContent === store.getState().category) {
+        e.classList.add('active');
+      }
+    });
+    checkbox.checked = false;
   }
 }
 
