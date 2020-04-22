@@ -111,8 +111,8 @@ class Statistic {
 
       const statisticsContainer = document.querySelector('.statistics-container');
       statisticsContainer.append(statisticsButtonContainer, tableContainer);
+      this.clearStatistics();
     }
-    this.clearStatistics();
   }
 
 

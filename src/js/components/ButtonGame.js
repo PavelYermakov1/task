@@ -35,6 +35,9 @@ class ButtonGame {
           if (store.getState().game) {
             const { target } = event;
             if (target.getAttribute('data') === store.getState().currentWord) {
+              store.setState({
+                counter: 0,
+              });
               store.getState().gameCorrect.push(target.firstChild.textContent);
               localStorage.setItem('gameCorrect', JSON.stringify(store.getState().gameCorrect));
               target.classList.add('inactive');
@@ -99,11 +102,19 @@ class ButtonGame {
     const rating = document.querySelector('.rating');
     const succedImage = document.createElement('div');
     const elemContener = document.querySelectorAll('.element-container');
+    const starSucces = document.querySelectorAll('.star-succes');
+    const starError = document.querySelectorAll('.star-error');
     succedImage.classList.add('succes-image');
     succedImage.style.backgroundImage = 'url("./src/assets/img/success.jpg")';
     succedImage.textContent = 'WIN !!!';
     rating.append(succedImage);
     elemContener.forEach((e) => {
+      e.style.display = 'none';
+    });
+    starSucces.forEach((e) => {
+      e.style.display = 'none';
+    });
+    starError.forEach((e) => {
       e.style.display = 'none';
     });
     rating.style.justifyContent = 'center';
@@ -114,11 +125,19 @@ class ButtonGame {
     const rating = document.querySelector('.rating');
     const succedImage = document.createElement('div');
     const elemContener = document.querySelectorAll('.element-container');
+    const starSucces = document.querySelectorAll('.star-succes');
+    const starError = document.querySelectorAll('.star-error');
     succedImage.classList.add('succes-image');
     succedImage.style.backgroundImage = 'url("./src/assets/img/failure.jpg")';
     succedImage.textContent = `${number} Errors`;
     rating.append(succedImage);
     elemContener.forEach((e) => {
+      e.style.display = 'none';
+    });
+    starSucces.forEach((e) => {
+      e.style.display = 'none';
+    });
+    starError.forEach((e) => {
       e.style.display = 'none';
     });
     rating.style.justifyContent = 'center';
