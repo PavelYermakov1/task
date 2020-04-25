@@ -35,9 +35,9 @@ class ButtonGame {
           if (store.getState().game) {
             const { target } = event;
             if (target.getAttribute('data') === store.getState().currentWord) {
-              store.setState({
-                counter: 0,
-              });
+              // store.setState({
+              //   counter: 0,
+              // });
               store.getState().gameCorrect.push(target.firstChild.textContent);
               localStorage.setItem('gameCorrect', JSON.stringify(store.getState().gameCorrect));
               target.classList.add('inactive');
@@ -64,9 +64,9 @@ class ButtonGame {
               starError.style.backgroundImage = 'url("./src/assets/img/star.svg")';
               starError.classList.add('star-error');
               rating.append(starError);
-              store.setState({
-                counter: 0,
-              });
+              // store.setState({
+              //   counter: 0,
+              // });
               count += 1;
               store.setState({
                 counter: count,
