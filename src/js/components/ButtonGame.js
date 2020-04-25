@@ -82,9 +82,9 @@ class ButtonGame {
               } else {
                 this.failurePlay(store.getState().counter);
                 setTimeout(this.backPlay, 7000);
-                store.setState({
-                  counter: 0,
-                });
+                // store.setState({
+                //   counter: 0,
+                // });
               }
             }
           }
