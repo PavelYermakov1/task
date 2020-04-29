@@ -13,11 +13,11 @@ class Card {
   render() {
     switch (store.getState().switch) {
       case 'train':
-        mainCards.forEach((e) => e.classList.add('green'));
+        mainCards.forEach((element) => element.classList.add('green'));
         listNavigation.classList.add('green');
         break;
       case 'play':
-        mainCards.forEach((e) => e.classList.remove('green'));
+        mainCards.forEach((element) => element.classList.remove('green'));
         listNavigation.classList.remove('green');
         break;
       default:
@@ -28,7 +28,7 @@ class Card {
   renderCards(set) {
     const fragment = document.createDocumentFragment();
 
-    set.forEach((e) => {
+    set.forEach((elem) => {
       const elementContainer = document.createElement('div');
       elementContainer.classList.add('element-container');
 
@@ -38,23 +38,23 @@ class Card {
 
       const front = document.createElement('div');
       front.classList.add('front');
-      front.style.backgroundImage = `url("${e.image}")`;
-      front.setAttribute('data', `${e.audioSrc}`);
+      front.style.backgroundImage = `url("${elem.image}")`;
+      front.setAttribute('data', `${elem.audioSrc}`);
 
       const back = document.createElement('div');
       back.classList.add('back');
-      back.style.backgroundImage = `url("${e.image}")`;
+      back.style.backgroundImage = `url("${elem.image}")`;
 
       const rotate = document.createElement('div');
       rotate.classList.add('rotate');
 
       const cardTitle = document.createElement('div');
       cardTitle.classList.add('card-title');
-      cardTitle.textContent = e.word;
+      cardTitle.textContent = elem.word;
 
       const cardTitleBack = document.createElement('div');
       cardTitleBack.classList.add('card-title');
-      cardTitleBack.textContent = e.translation;
+      cardTitleBack.textContent = elem.translation;
 
       if (store.getState().switch === 'play') {
         cardTitle.classList.add('none');
@@ -84,10 +84,10 @@ class Card {
     store.setState({
       category: `${currentTarget.textContent.trim()}`,
     });
-    menuLink.forEach((e) => {
-      e.classList.remove('active');
-      if (e.textContent === store.getState().category) {
-        e.classList.add('active');
+    menuLink.forEach((element) => {
+      element.classList.remove('active');
+      if (element.textContent === store.getState().category) {
+        element.classList.add('active');
       }
     });
     checkbox.checked = false;

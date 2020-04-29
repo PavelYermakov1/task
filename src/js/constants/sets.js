@@ -472,6 +472,20 @@ const sets = {
           },
         ],
 
+  success: {
+    image: './src/assets/img/star-win.svg',
+    audioSrc: './src/assets/audio/success.mp3',
+    finalImage: './src/assets/img/success.jpg',
+    finalAudioSrc: './src/assets/audio/gta.mp3',
+  },
+
+  fail: {
+    image: './src/assets/img/star.svg',
+    audioSrc: './src/assets/audio/error.mp3',
+    finalImage: './src/assets/img/failure.jpg',
+    finalAudioSrc: './src/assets/audio/dun.mp3',
+  },
+
 
 };
 

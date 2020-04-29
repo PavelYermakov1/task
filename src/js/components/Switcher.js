@@ -27,5 +27,4 @@ const swither = new Switcher();
 const label = document.querySelector('.switch');
 label.addEventListener('mouseup', swither.buttonSwitch);
 
-
 export default swither;

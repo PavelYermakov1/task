@@ -3,17 +3,17 @@
 /* eslint-disable no-loop-func */
 
 import store from '../store/store';
-
+import sets from '../constants/sets';
 
 class ButtonGame {
   play() {
-    if (store.getState().switch === 'play' && store.getState().category != null) {
+    if (store.getState().switch === 'play' && store.getState().category != null && store.getState().category !== 'Main Page') {
       const arr = [];
       let count = 0;
       const playButton = document.querySelector('.btn');
       const face = document.querySelectorAll('.front');
       const rating = document.querySelector('.rating');
-      face.forEach((e) => arr.push(e));
+      face.forEach((element) => arr.push(element));
       arr.sort(() => 0.5 - Math.random());
       const word = arr.pop().getAttribute('data');
       store.setState({
@@ -35,15 +35,15 @@ class ButtonGame {
           if (store.getState().game) {
             const { target } = event;
             if (target.getAttribute('data') === store.getState().currentWord) {
-              // store.setState({
-              //   counter: 0,
-              // });
+              store.setState({
+                counter: count,
+              });
               store.getState().gameCorrect.push(target.firstChild.textContent);
               localStorage.setItem('gameCorrect', JSON.stringify(store.getState().gameCorrect));
               target.classList.add('inactive');
-              this.audioPlay('./src/assets/audio/success.mp3');
+              this.audioPlay(sets.success.audioSrc);
               const starSucces = document.createElement('div');
-              starSucces.style.backgroundImage = 'url("./src/assets/img/star-win.svg")';
+              starSucces.style.backgroundImage = `url("${sets.success.image}")`;
               starSucces.classList.add('star-succes');
               rating.append(starSucces);
               if (arr.length === 0) {
@@ -57,16 +57,16 @@ class ButtonGame {
               }
               setTimeout(this.audioPlay, 1500, store.getState().currentWord);
             } else if (!target.classList.contains('inactive')) {
-              this.audioPlay('./src/assets/audio/error.mp3');
+              this.audioPlay(sets.fail.audioSrc);
               store.getState().gameWrong.push(target.firstChild.textContent);
               localStorage.setItem('gameWrong', JSON.stringify(store.getState().gameWrong));
               const starError = document.createElement('div');
-              starError.style.backgroundImage = 'url("./src/assets/img/star.svg")';
+              starError.style.backgroundImage = `url("${sets.fail.image}")`;
               starError.classList.add('star-error');
               rating.append(starError);
-              // store.setState({
-              //   counter: 0,
-              // });
+              store.setState({
+                counter: 0,
+              });
               count += 1;
               store.setState({
                 counter: count,
@@ -74,17 +74,11 @@ class ButtonGame {
             }
             if (!store.getState().currentWord) {
               if (store.getState().counter === 0) {
-                // store.setState({
-                //   counter: 0,
-                // });
                 this.succedPlay();
                 setTimeout(this.backPlay, 7000);
               } else {
                 this.failurePlay(store.getState().counter);
                 setTimeout(this.backPlay, 7000);
-                // store.setState({
-                //   counter: 0,
-                // });
               }
             }
           }
@@ -105,7 +99,7 @@ class ButtonGame {
     const starSucces = document.querySelectorAll('.star-succes');
     const starError = document.querySelectorAll('.star-error');
     succedImage.classList.add('succes-image');
-    succedImage.style.backgroundImage = 'url("./src/assets/img/success.jpg")';
+    succedImage.style.backgroundImage = `url("${sets.success.finalImage}")`;
     succedImage.textContent = 'WIN !!!';
     rating.append(succedImage);
     elemContener.forEach((e) => {
@@ -118,7 +112,7 @@ class ButtonGame {
       e.style.display = 'none';
     });
     rating.style.justifyContent = 'center';
-    this.audioPlay('./src/assets/audio/gta.mp3');
+    this.audioPlay(sets.success.finalAudioSrc);
   }
 
   failurePlay(number) {
@@ -128,7 +122,7 @@ class ButtonGame {
     const starSucces = document.querySelectorAll('.star-succes');
     const starError = document.querySelectorAll('.star-error');
     succedImage.classList.add('succes-image');
-    succedImage.style.backgroundImage = 'url("./src/assets/img/failure.jpg")';
+    succedImage.style.backgroundImage = `url("${sets.fail.finalImage}")`;
     succedImage.textContent = `${number} Errors`;
     rating.append(succedImage);
     elemContener.forEach((e) => {
@@ -141,7 +135,7 @@ class ButtonGame {
       e.style.display = 'none';
     });
     rating.style.justifyContent = 'center';
-    this.audioPlay('./src/assets/audio/dun.mp3');
+    this.audioPlay(sets.fail.finalAudioSrc);
   }
 
   backPlay() {
@@ -160,8 +154,6 @@ class ButtonGame {
   }
 }
 
-
 const buttonGame = new ButtonGame();
-
 
 export default buttonGame;

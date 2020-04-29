@@ -6,15 +6,13 @@ import sets from '../constants/sets';
 import Card from './Card';
 import ButtonGame from './ButtonGame';
 
-
 const mainContainer = document.querySelector('.main-container');
-
 
 class CardsCanvas {
   render() {
     const prevCategoryContainer = document.querySelector('.category-container');
     const prevStatisticsContainer = document.querySelector('.statistics-container');
-    if (store.getState().category !== null && store.getState().category !== 'Statistics') {
+    if (store.getState().category !== null) {
       if (prevCategoryContainer) {
         prevCategoryContainer.remove();
       }

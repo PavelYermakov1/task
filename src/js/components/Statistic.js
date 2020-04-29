@@ -208,8 +208,6 @@ class Statistic {
   }
 }
 
-
 const statistic = new Statistic();
-
 
 export default store.connect(statistic, ['category']);

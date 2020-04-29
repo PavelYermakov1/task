@@ -7,7 +7,6 @@ const menuLink = document.querySelectorAll('.header-item');
 const mainContainer = document.querySelector('.main-container');
 const checkbox = document.querySelector('.hamburger-menu>input');
 
-
 class Menu {
   activedMenu(event) {
     const { target } = event;
