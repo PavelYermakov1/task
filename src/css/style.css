@@ -223,7 +223,7 @@ nav {
     height: calc(100vh + 50px);
     margin: -100px 0 0;
     padding: 125px 50px 50px;
-    left: calc(675px - 50vw);
+    left: 0px;
     background: linear-gradient(40deg,#ffd86f,#fc6262);
     list-style-type: none;
     transform-origin: 0 0;
@@ -237,7 +237,7 @@ nav {
 
 @media (max-width: 1080px) {
     .menu {
-        left: calc(325px - 50vw);
+        left: 0px;
     }
 }
 
